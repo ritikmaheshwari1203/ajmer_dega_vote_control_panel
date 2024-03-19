@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student-Teacher Mapping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Add Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+</head>
+
+<body class="overflow-x-hidden">
+
+    <header class="overflow-hidden bg-[#161679] text-white h-fit w-[100vw]">
+        <nav class="flex justify-between items-center overflow-hidden">
+            <div class="md:pr-[2rem] pt-4 md:pt-0 pb-4 md:pb-0   flex justify-center items-center">
+                <img class="w-[8rem] h-[8rem] object-fill rounded-full overflow-hidden"
+                    src="https://ajmerdegavote.in/assets/logo.6bb985f0.png" alt="" srcset="" />
+                <span>
+                    <h2 class=" md:text-xl font-bold">बसंता की मनुहार, वोट देवो नर-नार</h2>
+                    <h2 class=" font-bold">जिला अजमेर</h2>
+                    <h1 class=" font-bold">DISTRICT AJMER</h1>
+                    <h1 id="" class="blinkText font-bold backdrop-blur-sm md:text-xl">मतदान तिथि - 25 नवम्बर, 2023</h1>
+                </span>
+
+            </div>
+            <div class="md:hidden h-full flex items-center pr-2">
+                <button id="navbar-toggle"
+                    class="rounded-md bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none">
+                    <svg class="w-8 h-8 m-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <!-- <div class="md:hidden text-black text-2xl">
+                    <ion-icon name="menu" onclick="change(this)"></ion-icon>
+                </div> -->
+            <ul
+                class="absolute md:pr-[2rem] font-bold top-[-150px] md:top-0 font-serif md:static md:flex md:space-x-9 text-white md:items-center transition-all ease-in duration-500 md:w-fit md:text-xl">
+                <li class="md:hover:scale-125 md:ease-out duration-500 cursor-pointer">
+                    <a href="../pages/ALLTeachers.html"> ALL Teachers</a>
+                    <!-- <a href="pages/adminPanel.html"> Admin Login </a> -->
+
+                </li>
+                <li class="md:hover:scale-125 md:ease-out duration-500 cursor-pointer">
+                    <a href="../pages/second_stage_assign.html"> Second Stage</a>
+                    <!-- <a href="pages/adminPanel.html"> Admin Login </a> -->
+
+                </li>
+
+                <li class="md:hover:scale-125 md:ease-out duration-500 cursor-pointer">
+                    <a href="../pages/Top_Result.html"> Top Result </a>
+                </li>
+                <li class="md:hover:scale-125 md:ease-out duration-500 cursor-pointer">
+                    <a href="../pages/teacher_work_info.html"> Work Info</a>
+                </li>
+
+                <li class="md:hover:scale-125 md:ease-out duration-500 cursor-pointer">
+                    <a href="../pages/ALLEntries.html"> ALL Entries </a>
+                </li>
+
+                <li class="md:hover:scale-125 md:ease-out duration-500 cursor-pointer">
+                    <a href="../api/logout.php"> Logout</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="navbar-menu"
+            class="bg-gray-300 text-black bg-opacity-50 z-[10] absolute w-[100vw] translate-y-[-250px] opacity-0 duration-200 md:hidden shadow-xl p-4 backdrop-blur-sm">
+            <a href="pages/adminPanel.html"> Admin Login </a>
+            <!-- <a href="signup.html" class="block mb-2 cursor-pointer">Signup</a> -->
+        </div>
+    </header>
+    <div class="md:hidden  w-full h-[3rem]  flex justify-center items-center   text-2xl font-bold bg-[#e5e7eb]">
+        <h1>जिला निर्वाचन अधिकारी, अजमेर</h1>
+    </div>
+
+
+
+    <section class="w-[100vw] h-[100vh]  flex justify-center items-center">
+        <div class="w-[70%] h-[80%] bg-gray-200 rounded-xl drop-shadow-xl shadow-xl overflow-hidden">
+            <div class="w-full h-[15%] bg-gray-400  flex justify-between">
+                <div class=" flex items-center text-2xl p-2 font-semibold">
+                    <h1 id="numberStudent"> Total Files : </h1>
+                </div>
+                <div class=" w-[30%] flex items-center p-2">
+                    <select id="vidhansabha" name="vidhansabha" onchange="searchResult()"
+                        class="bg-gray-50 h-[4rem] border border-black/10 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <!-- <option selected>अजमेर विधान सभा</option> -->
+                        <option selected value="matdata">मतदाता जागरूकता नवाचार</option>
+                        <option value="votingAppeal">वोटिंग अपील</option>
+                        <option value="votingFinger">वोटिंग फिंगर </option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="w-full h-[30%] flex flex-col justify-center items-center p-4">
+                <div class="">
+                    <h1 class="text-xl font-semibold"> Number of Assign File</h1>
+                </div>
+                <div class="my-1  w-[28%] ">
+                    <input type="number" id="EnterNumberStudent" maxlength="20"
+                        placeholder="Enter No. of Files you want to Assign"
+                        class="border-2 text-center pl-2 outline-black w-full h-[4rem] rounded-lg border-black/10"
+                        required>
+                </div>
+            </div>
+            <div class="w-full h-[55%] flex flex-col justify-start items-start  ">
+                <div class="w-full flex justify-center">
+                    <div class=" w-[30%] flex items-center p-2">
+                        <select id="teacher1" name="vidhansabha"
+                            class="bg-gray-50 h-[4rem] border border-black/10 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+
+                        </select>
+                    </div>
+
+                    <div class=" w-[30%] flex items-center p-2">
+                        <select id="teacher2"
+                            class="bg-gray-50 h-[4rem] border border-black/10 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+
+                        </select>
+                    </div>
+
+                    <div class="w-[30%] flex items-center p-2">
+                        <select id="teacher3"
+                            class="bg-gray-50 h-[4rem] border border-black/10 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <!-- <option selected>अजमेर विधान सभा</option> -->
+                            <option selected value="Ajmer North">teacher-1 &nbsp&nbsp&nbsp&nbsp Assigned-work-40
+                            </option>
+
+                        </select>
+                    </div>
+
+                </div>
+                <div class="w-full h-[20%] mt-[1rem]  flex justify-center items-center">
+                    <div class=" md:w-[40%] w-[70%] h-[80%] text-white duration-500 rounded-xl text-2xl bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 flex justify-center items-center"
+                        onclick="mappedTeacherToStudent()">
+                        <h1 class="cursor-pointer font-bold ">Submit Now</h1>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </section>
+
+    <section id="alert"
+        class="duration-300  ease-in-out   translate-y-[-20rem]  flex justify-center items-center fixed top-0  w-full h-[6rem]">
+        <div
+            class="w-[85%] text-center font-bold overflow-hidden h-[80%] p-1 bg-gray-300 bg-opacity-50  backdrop-blur-lg rounded-lg  md:w-[40%] flex items-center justify-center">
+            <p id="alerttext" class=" text-2xl"></p>
+        </div>
+
+    </section>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function split(x, n) {
+            let splitarray = []
+            if (x < n) {
+
+            }
+            // document.write("-1 ");
+            else if (x % n == 0) {
+                for (let i = 0; i < n; i++)
+                    splitarray.push(x / n)
+                // document.write((x / n) + " ");
+            }
+            else {
+                let zp = n - (x % n);
+                let pp = Math.floor(x / n);
+                for (let i = 0; i < n; i++) {
+
+                    if (i >= zp)
+                        splitarray.push(pp + 1);
+                    // document.write((pp + 1) + " ");
+                    else
+                        splitarray.push(pp)
+                    // document.write(pp + " ");
+                }
+            }
+
+            return splitarray
+        }
+
+        function searchResult() {
+            let complethtml = ""
+            let html = ""
+            let total_student = 0;
+
+            let vidhansabha = document.getElementById("vidhansabha").value
+
+
+
+            param = {
+                'vidhansabha': vidhansabha
+            }
+
+            let Jsondata = JSON.stringify(param)
+
+            obj = {
+                method: 'post',
+                header: {
+                    'Content-Type': 'application/json'
+                },
+                body: Jsondata
+            }
+
+
+
+            fetch("../api/teacher_list.php", obj).then(function (response) {
+                return response.json()
+            }).then(function (data) {
+                // console.log(data);
+
+                if(data=="NonvalidUser"){
+
+                    location.href="./admin_login.html"
+                    
+                }
+
+                else{
+
+                    let summition = 0;
+                let teacher1 = document.getElementById("teacher1")
+                let teacher2 = document.getElementById("teacher2")
+                let teacher3 = document.getElementById("teacher3")
+                let numberStudent = document.getElementById("numberStudent");
+                // console.log("total=", data);
+
+                teacher_list = data[0]
+                total_student = data[1]
+
+                numberStudent.innerHTML = "Total Files : " + total_student
+                length = teacher_list.length
+
+                // console.log("length",length);
+
+                teacher_list_lenght = split(length, 3)
+
+                // console.log("length=", teacher_list_lenght);
+
+                let html = "";
+                for (let index = 0; index < teacher_list_lenght[0]; index++) {
+                    html = html + `<option value='${teacher_list[index][0]}'>${teacher_list[index][1]} &nbsp&nbsp&nbsp&nbsp   Work assign = ${teacher_list[index][2]}</option>`
+
+                }
+
+                teacher1.innerHTML = html
+
+                html = "";
+
+                for (let index = teacher_list_lenght[0]; index < teacher_list_lenght[0] + teacher_list_lenght[1]; index++) {
+                    html = html + `<option value='${teacher_list[index][0]}'>${teacher_list[index][1]} &nbsp&nbsp&nbsp&nbsp Work assign = ${teacher_list[index][2]}</option>`
+                }
+
+                teacher2.innerHTML = html
+
+                html = "";
+
+                for (let index = teacher_list_lenght[0] + teacher_list_lenght[1]; index < teacher_list_lenght[0] + teacher_list_lenght[1] + teacher_list_lenght[2]; index++) {
+                    html = html + `<option value='${teacher_list[index][0]}'>${teacher_list[index][1]} &nbsp&nbsp&nbsp&nbsp Work assign = ${teacher_list[index][2]}</option>`
+
+                }
+
+                teacher3.innerHTML = html
+
+                html = "";
+
+
+                }
+
+                
+
+            })
+        }
+
+        function mappedTeacherToStudent() {
+            let malert = document.getElementById("alert")
+            let alerttext = document.getElementById("alerttext")
+            let FirstTeacherID = document.getElementById("teacher1").value
+            let SecondTeacherID = document.getElementById("teacher2").value
+            let ThirdTeacherID = document.getElementById("teacher3").value
+            let assigned = document.getElementById('EnterNumberStudent').value
+            let vidhansabha = document.getElementById("vidhansabha").value
+
+
+            // console.log(assigned, FirstTeacherID, SecondTeacherID, ThirdTeacherID);
+            // teacherarray[FirstTeacherID,SecondTeacherID,ThirdTeacherID]
+            param = {
+                'FirstTeacherID': FirstTeacherID,
+                'SecondTeacherID': SecondTeacherID,
+                'ThirdTeacherID': ThirdTeacherID,
+                'assigned': assigned,
+                'vidhansabha': vidhansabha
+            }
+
+            let Jsondata = JSON.stringify(param)
+
+            obj = {
+                method: 'post',
+                header: {
+                    'Content-Type': 'application/json'
+                },
+                body: Jsondata
+            }
+
+            fetch("../api/mapped.php", obj).then(function (response) {
+                return response.json()
+            }).then(function (data) {
+
+
+                searchResult()
+                alerttext.innerText = "Work Assign Successfully!!!"
+                malert.classList.toggle("translate-y-[-20rem]")
+                setTimeout(() => {
+                    malert.classList.toggle("translate-y-[-20rem]")
+                }, 2500);
+
+
+                // location.href
+                // console.log(data);
+            })
+        }
+
+        searchResult()
+        // searchResult()
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
